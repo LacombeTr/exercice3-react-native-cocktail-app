@@ -27,12 +27,12 @@ export const DisplayZone = ({ goals, handleRemoveGoal }) => {
         deleteButton: {
             paddingHorizontal: 10,
             paddingVertical: 4,
-            borderRadius: 50,
         },
 
         deleteButtonText: {
             color: "white",
             fontWeight: "bold",
+            border: "0px solid transparent",
         },
     });
 

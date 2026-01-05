@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import { CreateZone } from "./components/CreateZone";
 import { DisplayZone } from "./components/DisplayZone";
 
@@ -37,10 +37,9 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <Image
+            <ImageBackground
                 style={styles.background}
                 source={require("./assets/background-image.jpg")}
-                resizeMode="cover"
             />
             <Text style={styles.title}>Mes buts 2026</Text>
             <Text>Ajouter un nouvel objectif:</Text>
