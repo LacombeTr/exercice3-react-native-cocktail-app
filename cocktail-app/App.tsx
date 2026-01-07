@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
+import { HomeScreen } from "./screens/HomeScreen";
+import { SearchScreen } from "./screens/SearchScreen";
+import { RecipeScreen } from "./screens/RecipeScreen";
+
+export type RootStackParamList = {
+    Home: undefined;
+    Recipe: { recipeId: string };
+    Search: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name='Home' component={HomeScreen} />
+                <Stack.Screen name='Recipe' component={RecipeScreen} />
+                <Stack.Screen name='Search' component={SearchScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
