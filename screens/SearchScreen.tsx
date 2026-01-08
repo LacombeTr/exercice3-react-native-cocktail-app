@@ -8,7 +8,6 @@ import { RenderFooter } from "./HomeScreen";
 
 export const SearchScreen = () => {
     const [searchedName, setSearchedName] = useState<string>("");
-    const [searchedIngredient, setSearchedIngredient] = useState<string>("");
 
     const { allCocktails, loading, loadMore, loadingMore, hasMore } =
         UseCocktails();
@@ -17,7 +16,6 @@ export const SearchScreen = () => {
         cocktailList: allCocktails,
         filters: {
             strDrink: searchedName,
-            // strIngredient: searchedIngredient,
         },
     });
 
@@ -33,17 +31,6 @@ export const SearchScreen = () => {
                             style={styles.textInput}
                             value={searchedName}
                             onChangeText={setSearchedName}
-                        />
-                    </View>
-                    {/* <View style={styles.searchRow}>
-                        <Text style={styles.searchLabel}>Catégorie:</Text>
-                    </View> */}
-                    <View style={styles.searchRow}>
-                        <Text style={styles.searchLabel}>Ingrédient:</Text>
-                        <TextInput
-                            style={styles.textInput}
-                            value={searchedIngredient}
-                            onChangeText={setSearchedIngredient}
                         />
                     </View>
                 </View>

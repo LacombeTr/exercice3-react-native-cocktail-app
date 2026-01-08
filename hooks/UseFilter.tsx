@@ -4,21 +4,29 @@ type UseFilterProps = {
 };
 
 export const UseFilter = ({ cocktailList, filters }: UseFilterProps) => {
-    const filteredCocktails =
-        cocktailList.filter((cocktail) => {
-            for (const key in filters) {
-                if (
-                    filters[key] &&
-                    !cocktail[key]
-                        .toLowerCase()
-                        .trim()
-                        .includes(filters[key].toLowerCase().trim())
-                ) {
-                    return false;
-                }
+    const filteredCocktails = cocktailList.filter((cocktail) => {
+        for (const key in filters) {
+            const filterValue = filters[key];
+
+            if (!filterValue) continue;
+
+            const cocktailValue = cocktail[key];
+            if (cocktailValue === undefined || cocktailValue === null) {
+                return false;
             }
-            return true;
-        }) || [];
+
+            const cocktailStr = String(cocktailValue);
+            if (
+                !cocktailStr
+                    .toLowerCase()
+                    .trim()
+                    .includes(filterValue.toLowerCase().trim())
+            ) {
+                return false;
+            }
+        }
+        return true;
+    });
 
     return { filteredCocktails };
 };
