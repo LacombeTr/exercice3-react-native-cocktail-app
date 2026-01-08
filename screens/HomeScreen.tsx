@@ -9,18 +9,18 @@ import { UseCocktails } from "../hooks/UseCocktails";
 import { CocktailItem } from "../components/CocktailItem";
 import { BackgroundImage } from "../components/BackgroundImage";
 
+export const RenderFooter = ({ loadingMore }: { loadingMore: boolean }) => {
+    if (!loadingMore) return null;
+    return (
+        <View style={styles.footer}>
+            <ActivityIndicator size='small' color='#0000ff' />
+        </View>
+    );
+};
+
 export const HomeScreen = () => {
     const { cocktailList, loading, loadMore, loadingMore, hasMore } =
         UseCocktails();
-
-    const renderFooter = () => {
-        if (!loadingMore) return null;
-        return (
-            <View style={styles.footer}>
-                <ActivityIndicator size='small' color='#0000ff' />
-            </View>
-        );
-    };
 
     if (loading) {
         return (
@@ -40,7 +40,7 @@ export const HomeScreen = () => {
                     keyExtractor={(item) => item.idDrink}
                     onEndReached={loadMore}
                     onEndReachedThreshold={0.2}
-                    ListFooterComponent={renderFooter}
+                    ListFooterComponent={<RenderFooter loadingMore={loadingMore} />}
                     contentContainerStyle={styles.listContent}
                 />
             </View>
