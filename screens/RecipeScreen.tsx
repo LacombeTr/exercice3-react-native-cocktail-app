@@ -43,12 +43,17 @@ export const RecipeScreen = ({ route }: RecipeScreenProps) => {
                     <View style={styles.recipeContainer}>
                         <Text style={styles.title}>{cocktail.strDrink}</Text>
 
-                        <ScrollView contentContainerStyle={{ alignItems: "center", paddingHorizontal:8 }}>
+                        <ScrollView
+                            contentContainerStyle={{
+                                alignItems: "center",
+                                paddingHorizontal: 8,
+                            }}
+                        >
                             <Image
                                 source={{
                                     uri: cocktail.strDrinkThumb,
                                 }}
-                                style={{ width: 200, height: 200 }}
+                                style={styles.image}
                             />
                             <Text style={styles.boldText}>Ingredients:</Text>
                             {Object.entries(cocktail)
@@ -85,6 +90,12 @@ const styles = StyleSheet.create({
         paddingTop: 80,
         paddingBottom: 32,
         alignContent: "center",
+    },
+    image: {
+        width: 200,
+        height: 200,
+        borderRadius: "50%",
+        marginVertical: 32,
     },
     title: {
         fontFamily: "DechoraZone",
