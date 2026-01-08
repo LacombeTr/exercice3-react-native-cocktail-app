@@ -1,7 +1,26 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, FlatList } from "react-native";
 import { BackgroundImage } from "../components/BackgroundImage";
+import { UseCocktails } from "../hooks/UseCocktails";
+import { useState } from "react";
+import { UseFilter } from "../hooks/UseFilter";
+import { CocktailItem } from "../components/CocktailItem";
+import { RenderFooter } from "./HomeScreen";
 
 export const SearchScreen = () => {
+    const [searchedName, setSearchedName] = useState<string>("");
+    const [searchedIngredient, setSearchedIngredient] = useState<string>("");
+
+    const { allCocktails, loading, loadMore, loadingMore, hasMore } =
+        UseCocktails();
+
+    const { filteredCocktails } = UseFilter({
+        cocktailList: allCocktails,
+        filters: {
+            strDrink: searchedName,
+            // strIngredient: searchedIngredient,
+        },
+    });
+
     return (
         <BackgroundImage>
             <View style={styles.container}>
@@ -10,16 +29,34 @@ export const SearchScreen = () => {
                 <View style={styles.searchZone}>
                     <View style={styles.searchRow}>
                         <Text style={styles.searchLabel}>Nom:</Text>
-                        <TextInput style={styles.textInput} />
+                        <TextInput
+                            style={styles.textInput}
+                            value={searchedName}
+                            onChangeText={setSearchedName}
+                        />
                     </View>
-                    <View style={styles.searchRow}>
+                    {/* <View style={styles.searchRow}>
                         <Text style={styles.searchLabel}>Catégorie:</Text>
-                    </View>
+                    </View> */}
                     <View style={styles.searchRow}>
                         <Text style={styles.searchLabel}>Ingrédient:</Text>
-                        <TextInput style={styles.textInput} />
+                        <TextInput
+                            style={styles.textInput}
+                            value={searchedIngredient}
+                            onChangeText={setSearchedIngredient}
+                        />
                     </View>
                 </View>
+
+                <FlatList
+                    data={filteredCocktails}
+                    renderItem={(item) => <CocktailItem item={item.item} />}
+                    keyExtractor={(item) => item.idDrink}
+                    onEndReached={loadMore}
+                    onEndReachedThreshold={0.2}
+                    ListFooterComponent={<></>}
+                    contentContainerStyle={styles.listContent}
+                />
             </View>
         </BackgroundImage>
     );
@@ -71,5 +108,9 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         paddingHorizontal: 8,
         color: "#fff",
+    },
+
+    listContent: {
+        paddingHorizontal: 16,
     },
 });
