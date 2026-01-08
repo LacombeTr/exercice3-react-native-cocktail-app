@@ -5,7 +5,7 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { SearchScreen } from "./screens/SearchScreen";
 import { RecipeScreen } from "./screens/RecipeScreen";
 import { useFonts } from "expo-font";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 export type RootStackParamList = {
     Home: undefined;
@@ -19,6 +19,7 @@ export default function App() {
     const [loaded, error] = useFonts({
         Moonshine: require("./assets/fonts/Moonshine.otf"),
         "Moonshine-Bold": require("./assets/fonts/Moonshine-Bold.otf"),
+        "DechoraZone": require("./assets/fonts/DechoraZone.ttf"),
     });
 
     return (

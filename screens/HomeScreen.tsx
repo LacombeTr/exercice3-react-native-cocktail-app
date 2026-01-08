@@ -62,7 +62,7 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
     searchButton: {
         position: "absolute",
-        top: 20,
+        top:98,
         right: 20,
         marginTop: 10,
     },
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     title: {
-        fontFamily: "Dechora",
+        fontFamily: "DechoraZone",
         color: "#fff",
         fontWeight: "bold",
         fontSize: 48,
