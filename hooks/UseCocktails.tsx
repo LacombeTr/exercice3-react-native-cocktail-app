@@ -23,10 +23,12 @@ export const UseCocktails = () => {
             );
 
             const results = await Promise.all(promises);
-            const allDrinks = results.flatMap((response) => response.data.drinks || []);
+            const allDrinks = results.flatMap(
+                (response) => response.data.drinks || []
+            );
 
             setAllCocktails(allDrinks);
-            
+
             setCocktailList(allDrinks.slice(0, PAGE_SIZE));
             setPage(1);
             setHasMore(allDrinks.length > PAGE_SIZE);
@@ -61,6 +63,7 @@ export const UseCocktails = () => {
     }, []);
 
     return {
+        allCocktails,
         cocktailList,
         fetchAllCocktails,
         loading,
