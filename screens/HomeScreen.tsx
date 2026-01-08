@@ -1,20 +1,15 @@
 import {
     View,
-    Button,
     Text,
     StyleSheet,
     FlatList,
     ActivityIndicator,
-    Pressable,
 } from "react-native";
 import { UseCocktails } from "../hooks/UseCocktails";
 import { CocktailItem } from "../components/CocktailItem";
-import { useNavigation } from "@react-navigation/native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { BackgroundImage } from "../components/BackgroundImage";
 
 export const HomeScreen = () => {
-    const navigation = useNavigation<any>();
     const { cocktailList, loading, loadMore, loadingMore, hasMore } =
         UseCocktails();
 
@@ -48,24 +43,12 @@ export const HomeScreen = () => {
                     ListFooterComponent={renderFooter}
                     contentContainerStyle={styles.listContent}
                 />
-                <Pressable
-                    onPress={() => navigation.navigate("Search")}
-                    style={styles.searchButton}
-                >
-                    <Ionicons name='search' size={30} color='#fff' />
-                </Pressable>
             </View>
         </BackgroundImage>
     );
 };
 
 const styles = StyleSheet.create({
-    searchButton: {
-        position: "absolute",
-        top:98,
-        right: 20,
-        marginTop: 10,
-    },
     container: {
         flex: 1,
         paddingTop: 96,

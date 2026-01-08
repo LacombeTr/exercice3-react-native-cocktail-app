@@ -1,11 +1,13 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ScrollView, View, Text, Image, StyleSheet } from "react-native";
-import { RootStackParamList } from "../App";
+import { HomeStackParamList, SearchStackParamList } from "../App";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BackgroundImage } from "../components/BackgroundImage";
 
-type RecipeScreenProps = NativeStackScreenProps<RootStackParamList, "Recipe">;
+type RecipeScreenProps =
+    | NativeStackScreenProps<HomeStackParamList, "Recipe">
+    | NativeStackScreenProps<SearchStackParamList, "Recipe">;
 
 export const RecipeScreen = ({ route }: RecipeScreenProps) => {
     const { recipeId } = route.params;

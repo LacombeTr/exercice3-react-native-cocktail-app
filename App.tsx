@@ -1,19 +1,22 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen } from "./screens/HomeScreen";
-import { SearchScreen } from "./screens/SearchScreen";
-import { RecipeScreen } from "./screens/RecipeScreen";
+import { RootNavigator } from "./navigation/RootNavigator";
 import { useFonts } from "expo-font";
 import { StyleSheet } from "react-native";
 
 export type RootStackParamList = {
-    Home: undefined;
     Recipe: { recipeId: string };
-    Search: undefined;
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+export type HomeStackParamList = {
+    HomeList: undefined;
+    Recipe: { recipeId: string };
+};
+
+export type SearchStackParamList = {
+    SearchList: undefined;
+    Recipe: { recipeId: string };
+};
 
 export default function App() {
     const [loaded, error] = useFonts({
@@ -24,18 +27,7 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{
-                    contentStyle: { backgroundColor: "transparent" },
-                    headerStyle: { backgroundColor: "transparent" },
-                    headerTransparent: true,
-                    headerTintColor: "#fff",
-                }}
-            >
-                <Stack.Screen name='Home' component={HomeScreen} />
-                <Stack.Screen name='Recipe' component={RecipeScreen} />
-                <Stack.Screen name='Search' component={SearchScreen} />
-            </Stack.Navigator>
+            <RootNavigator />
         </NavigationContainer>
     );
 }
