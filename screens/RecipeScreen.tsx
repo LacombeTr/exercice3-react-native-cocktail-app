@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { ScrollView, View, Text, Image, StyleSheet } from "react-native";
 import { RootStackParamList } from "../App";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -39,29 +39,35 @@ export const RecipeScreen = ({ route }: RecipeScreenProps) => {
                     <Text style={styles.text}>Loading...</Text>
                 ) : cocktail ? (
                     <View style={styles.recipeContainer}>
-                        <Text style={styles.title}>
-                            {cocktail.strDrink}
-                        </Text>
-                        <Image
-                            source={{
-                                uri: cocktail.strDrinkThumb,
-                            }}
-                            style={{ width: 200, height: 200 }}
-                        />
-                        <Text style={styles.boldText}>
-                            Ingredients:
-                        </Text>
-                        {Object.entries(cocktail)
-                            .filter(([key]) => key.startsWith("strIngredient") && cocktail[key])
-                            .map(([key, value]) => (
-                                <Text key={key} style={styles.text}>
-                                    - {value} : {cocktail[`strMeasure${key.slice(13)}`] || ""}
-                                </Text>
-                            ))}
-                        <Text style={styles.boldText}>
-                            Instructions:
-                        </Text>
-                        <Text style={styles.text}>{cocktail.strInstructionsFR}</Text>
+                        <Text style={styles.title}>{cocktail.strDrink}</Text>
+
+                        <ScrollView contentContainerStyle={{ alignItems: "center", paddingHorizontal:8 }}>
+                            <Image
+                                source={{
+                                    uri: cocktail.strDrinkThumb,
+                                }}
+                                style={{ width: 200, height: 200 }}
+                            />
+                            <Text style={styles.boldText}>Ingredients:</Text>
+                            {Object.entries(cocktail)
+                                .filter(
+                                    ([key]) =>
+                                        key.startsWith("strIngredient") &&
+                                        cocktail[key]
+                                )
+                                .map(([key, value]) => (
+                                    <Text key={key} style={styles.text}>
+                                        - {value} :{" "}
+                                        {cocktail[
+                                            `strMeasure${key.slice(13)}`
+                                        ] || ""}
+                                    </Text>
+                                ))}
+                            <Text style={styles.boldText}>Instructions:</Text>
+                            <Text style={styles.text}>
+                                {cocktail.strInstructionsFR}
+                            </Text>
+                        </ScrollView>
                     </View>
                 ) : (
                     <Text style={styles.text}>Cocktail not found.</Text>
@@ -79,7 +85,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
     },
     title: {
-        fontFamily: "Dechora",
+        fontFamily: "DechoraZone",
         color: "#fff",
         fontWeight: "bold",
         fontSize: 48,
